@@ -413,30 +413,7 @@ class CloudScraper(Session):
     # ------------------------------------------------------------------------------- #
 
     def is_Challenge_Request(self, resp):
-        if self.is_Firewall_Blocked(resp):
-            self.simpleException(
-                CloudflareCode1020,
-                'Cloudflare has blocked this request (Code 1020 Detected).'
-            )
-
-        if self.is_New_Captcha_Challenge(resp):
-            self.simpleException(
-                CloudflareChallengeError,
-                'Detected a Cloudflare version 2 Captcha challenge, This feature is not available in the opensource (free) version.'
-            )
-
-        if self.is_New_IUAM_Challenge(resp):
-            self.simpleException(
-                CloudflareChallengeError,
-                'Detected a Cloudflare version 2 challenge, This feature is not available in the opensource (free) version.'
-            )
-
-        if self.is_Captcha_Challenge(resp) or self.is_IUAM_Challenge(resp):
-            if self.debug:
-                print('Detected a Cloudflare version 1 challenge.')
-            return True
-
-        return False
+        return True
 
     # ------------------------------------------------------------------------------- #
     # Try to solve cloudflare javascript challenge.
